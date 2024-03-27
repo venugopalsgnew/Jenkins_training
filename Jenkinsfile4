@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Run Ansible Ad-Hoc Command') {
+            steps {
+                // Run your ad-hoc Ansible command here
+                script {
+                    // Replace 'host' with your target host or group
+                    sh 'ansible host -m command -a "hostname"'
+                }
+            }
+        }
+    }
+}
