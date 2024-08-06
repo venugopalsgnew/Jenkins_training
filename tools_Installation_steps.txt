@@ -1,0 +1,105 @@
+JAVA Installation
+
+sudo apt update
+
+sudo apt install fontconfig openjdk-17-jre -y
+
+java -version
+
+find the java path by running:
+
+find / -name java
+
+now set the java environment variable:
+
+vi /etc/profile
+
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+
+export JAVA_HOME
+
+export PATH
+
+source /etc/environment ( exit from the current shell and re-login )
+
+------------------
+MAVEN Installation
+
+cd /opt/
+
+Go to maven download page and get the below URL
+
+wget https://dlcdn.apache.org/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.tar.gz
+
+#tar -xvzf apache-maven-3.9.6-bin.tar.gz
+
+#mv apache-maven-3.9.6-bin.tar.gz maven
+
+cd maven/bin
+
+./mvn -version -- would give us maven version
+
+place the below entries into /etc/profile
+
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+M2_HOME=/opt/maven
+
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin:$M2_HOME/bin
+
+export JAVA_HOME
+
+export M2_HOME
+
+export PATH
+
+source /etc/environment
+
+----------------------------------
+
+JENKINS Installation
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install Jenkins
+
+
+------------------------
+
+SONAR Installation
+
+JAVA is a pre-requisite
+
+
+
+Create SonarQube User:
+
+useradd -m sonar
+
+Download and Install SonarQube:
+
+cd /opt
+
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
+
+unzip sonarqube-10.6.0.92116.zip
+
+chown -R sonar:sonar sonarqube-10.6.0.92116
+
+su - sonar
+
+cd /opt/sonarqube-10.6.0.92116/bin/linux-x86-64
+
+./sonar.sh start
+
+Access SonarQube: Open http://<Public_IP>:9000 in your browser. Default login is admin/admin.
+
+
